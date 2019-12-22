@@ -11,5 +11,7 @@ The app will allow you to create different categories of flashcards called "deck
 
 # How to run the project
 
+- Clone the project to your local
+- cd to your root directory of the project
 - run `yarn install`
 - run `yarn start`
