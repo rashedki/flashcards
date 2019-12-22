@@ -10,6 +10,11 @@ import AppStatusBar from './components/AppStatusBar';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { purple, white, red } from './utils/colors';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import decksReducer from './reducers';
+import Quiz from './components/Quiz';
+
 
 const Tabs = createBottomTabNavigator(
 	{
@@ -53,16 +58,7 @@ const MainNavigation = createStackNavigator({
 	Home: {
 		screen: Tabs
 	},
-	CreateDeck: {
-		screen: CreateDeck,
-		navigationOptions: {
-			headerTintColor: white,
-			title: 'Create Deck',
-			headerStyle: {
-				backgroundColor: purple
-			}
-		}
-	},
+
 	AddCard: {
 		screen: AddCard,
 		navigationOptions: {
@@ -72,6 +68,9 @@ const MainNavigation = createStackNavigator({
 				backgroundColor: purple
 			}
 		}
+	},
+  Quiz: {
+		screen: Quiz
 	},
 	DeckDetail: {
 		screen: DeckDetail,
@@ -90,10 +89,12 @@ const AppContainer = createAppContainer(MainNavigation);
 class App extends Component {
 	render() {
 		return (
-			<View style={{ flex: 1 }}>
-				<AppStatusBar backgroundColor={purple} barStyle="light-content" />
-				<AppContainer />
-			</View>
+      <Provider store={createStore(decksReducer)}>
+				<View style={{ flex: 1 }}>
+					<AppStatusBar backgroundColor={purple} barStyle="light-content" />
+					<AppContainer />
+				</View>
+			</Provider>
 		);
 	}
 }
