@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import AppButton from './AppButton';
 import { connect } from 'react-redux';
-import { addDeck } from '../actions';
+import { createNewDeck } from '../actions';
 import { red } from '../utils/colors';
 import ErrorMsg from './ErrorMsg';
 
@@ -24,7 +24,7 @@ class CreateDeck extends Component {
 			return;
 		}
 
-		this.props.dispatch(addDeck(this.state.value));
+		this.props.dispatch(createNewDeck(this.state.value));
 		this.setState({ value: '', error: '' });
 		this.props.navigation.navigate('Decks');
 	};
