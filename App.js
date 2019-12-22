@@ -91,7 +91,7 @@ const AppContainer = createAppContainer(MainNavigation);
 class App extends Component {
 	render() {
 		return (
-      <Provider store={createStore(decksReducer)}>
+      <Provider store={createStore(decksReducer, applyMiddleware(thunk))}>
 				<View style={{ flex: 1 }}>
 					<AppStatusBar backgroundColor={purple} barStyle="light-content" />
 					<AppContainer />
