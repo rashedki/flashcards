@@ -40,7 +40,7 @@ class Quiz extends Component {
 			this.setState({ showResults: true });
 			return;
 		}
-		this.setState({ currentQuestion: this.state.currentQuestion + 1 });
+		this.setState({ currentQuestion: this.state.currentQuestion + 1, showAnswer: false });
 	};
 
 	onRestart = () => {
@@ -64,7 +64,7 @@ class Quiz extends Component {
 						</Text>
 					</View>
 					<AppButton title="Restart Quiz" onPress={this.onRestart} />
-					<AppButton title="Back to Deck" onPress={() => this.props.navigation.navigate('Decks')} />
+					<AppButton title="Back to Deck" onPress={() => this.props.navigation.goBack()} />
 				</View>
 			);
 		} else {

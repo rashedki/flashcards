@@ -8,13 +8,22 @@ import { addNewCardToDeck } from '../actions'
 
 class AddCard extends Component {
 	state = {
-		question: 'what is your name?',
-		answer: 'Dilip the DON',
+		question: '',
+		answer: '',
 		errorMsg1: '',
 		errorMsg2: ''
 	};
 
 	onAddCard = () => {
+		if (this.state.question.length === 0 || this.state.answer.length === 0) {
+			if (this.state.question.length === 0) {
+				this.setState({ errorMsg1: 'Please enter a question' });
+			}
+			if (this.state.answer.length === 0) {
+				this.setState({ errorMsg2: 'Please enter an answer' });
+			}
+			return;
+		}
 		const id = this.props.navigation.state.params.id;
 		const card = {
 			question: this.state.question,

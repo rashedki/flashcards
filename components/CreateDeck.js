@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
-import AppButton from './AppButton';
-import { connect } from 'react-redux';
-import { createNewDeck } from '../actions';
-import { red } from '../utils/colors';
-import ErrorMsg from './ErrorMsg';
+import React, { Component } from 'react'
+import { StyleSheet, View, Text, TextInput } from 'react-native'
+import AppButton from './AppButton'
+import { connect } from 'react-redux'
+import { createNewDeck } from '../actions'
+import { red } from '../utils/colors'
+import ErrorMsg from './ErrorMsg'
+import { StackActions, NavigationActions } from 'react-navigation'
 
 class CreateDeck extends Component {
 	state = {
@@ -26,7 +27,16 @@ class CreateDeck extends Component {
 
 		this.props.dispatch(createNewDeck(this.state.value));
 		this.setState({ value: '', error: '' });
-		this.props.navigation.navigate('Decks');
+		const id = this.state.value;
+
+		const resetAction = StackActions.reset({
+			index: 1,
+			actions: [
+				NavigationActions.navigate({ routeName: 'Home' }),
+				NavigationActions.navigate({ routeName: 'DeckDetail', params: { id } })
+			]
+		});
+		this.props.navigation.dispatch(resetAction);
 	};
 	render() {
 		return (
